@@ -1,2 +1,1 @@
-# k8spad
-LinqPad for kubernetes or Lens replacement
+Linqpad for k8s or Lens alternative
