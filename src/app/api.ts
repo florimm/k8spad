@@ -7,4 +7,4 @@ const k8sAPi = kc.makeApiClient(k8s.CoreV1Api);
 
 export const kubApi = kc.makeApiClient(k8s.AppsV1Api);
 
-export default k8sAPi;
+export default { core: k8sAPi, apps: kubApi, config: kc };

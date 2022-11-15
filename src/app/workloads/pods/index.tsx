@@ -1,12 +1,25 @@
-import React from 'react';
 import { useQuery } from 'react-query';
+import { useClusterState } from 'contexts';
 import api from '../../api';
 
 const Pods = () => {
-  const { isLoading, isError, data, error } = useQuery('pods', () =>
-    api.listPodForAllNamespaces().then((res) => res.body.items)
+  const { state } = useClusterState();
+  const { isLoading, data } = useQuery(
+    ['pods', state.namespace.metadata.name],
+    () => {
+      console.log('requests for', state.namespace.metadata.name);
+      return api.core
+        .listNamespacedPod(state.namespace.metadata.name)
+        .then((res) => res.body.items);
+    },
+    {
+      enabled:
+        state.namespace !== null &&
+        state.namespace !== undefined &&
+        state.namespace.metadata !== undefined,
+    }
   );
-  console.log('pods', data);
+  console.log('data', data);
   return (
     <div>
       <h1>{isLoading ? 'Loading' : 'Pods'}</h1>

@@ -1,13 +1,10 @@
-import React from 'react';
 import { useQuery } from 'react-query';
-import Button from 'react-bootstrap/Button';
 import api from '../api';
 
 const Nodes = () => {
-  const { isLoading, isError, data, error } = useQuery('nodes', () =>
-    api.listNode().then((res) => res.body.items)
+  const { isLoading, data } = useQuery('nodes', () =>
+    api.core.listNode().then((res) => res.body.items)
   );
-  console.log('nodes', data);
   return (
     <div>
       <h1>{isLoading ? 'Loading' : 'Nodes'}</h1>

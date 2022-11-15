@@ -1,11 +1,13 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import Button from 'react-bootstrap/Button';
+import { useClusterState } from 'contexts';
 import api from '../api';
 
 const Namespaces = () => {
-  const { isLoading, isError, data, error } = useQuery('namespaces', () =>
-    api.listNamespace().then((res) => res.body.items)
+  const { state, dispatch } = useClusterState();
+  const { isLoading, data } = useQuery('namespaces', () =>
+    api.core.listNamespace().then((res) => res.body.items)
   );
 
   return (
@@ -18,15 +20,29 @@ const Namespaces = () => {
             <td>Labels</td>
             <td>Age</td>
             <td>Status</td>
+            <td>Action</td>
           </tr>
         </thead>
         <tbody>
           {data?.map((item) => (
-            <tr>
+            <tr key={item.metadata.uid}>
               <td>{item.metadata?.name}</td>
-              <td>{Object.keys(item.metadata?.labels!).join(',')}</td>
+              <td>
+                {item.metadata?.labels
+                  ? Object.keys(item.metadata?.labels).join(',')
+                  : ''}
+              </td>
               <td>_</td>
               <td>_</td>
+              <td>
+                <Button
+                  onClick={() =>
+                    dispatch({ type: 'SET_NAMESPACE', payload: item })
+                  }
+                >
+                  Select
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
