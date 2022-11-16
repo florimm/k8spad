@@ -1,9 +1,11 @@
 import { useQuery } from 'react-query';
+import * as stream from 'stream';
 import { useClusterState } from 'contexts';
 import Loader from 'components/Loader';
 import YamlEditor from 'components/YamlEditor';
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
+import { V1Pod } from '@kubernetes/client-node';
 import api from '../../api';
 
 const Pods = () => {
@@ -24,6 +26,12 @@ const Pods = () => {
       enabled: name !== null,
     }
   );
+
+  const actionTaken = (action, item: V1Pod) => {
+    // api.exec.exec(item.metadata.namespace, item.metadata.name, command: "", stdout: process.stdout);
+    // setIsEditing(true)
+  };
+
   return (
     <>
       <div className="span-12">
@@ -59,9 +67,35 @@ const Pods = () => {
                   <td>_</td>
                   <td>_</td>
                   <td>
-                    <Button onClick={() => setIsEditing(true)}>
-                      Edit yaml
-                    </Button>
+                    <Dropdown
+                      onClick={(action) => actionTaken(action, item)}
+                      className="d-inline mx-2"
+                      autoClose="inside"
+                    >
+                      <Dropdown.Toggle id="dropdown-autoclose-inside">
+                        Actions
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item eventKey={0} href="#">
+                          Yaml
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey={1} href="#">
+                          Attach
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey={2} href="#">
+                          Shell
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey={3} href="#">
+                          Logs
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey={4} href="#">
+                          Edit
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey={5} href="#">
+                          Delete
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </td>
                 </tr>
               ))}

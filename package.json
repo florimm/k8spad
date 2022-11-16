@@ -110,6 +110,7 @@
   },
   "dependencies": {
     "@kubernetes/client-node": "^0.17.1",
+    "@reactuses/core": "^1.0.7",
     "ace-builds": "^1.13.0",
     "bootstrap": "^5.2.2",
     "electron-debug": "^3.2.0",

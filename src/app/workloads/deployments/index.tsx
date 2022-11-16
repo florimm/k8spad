@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import api, { kubApi } from '../../api';
+import api from '../../api';
 
 const Deployments = () => {
   const { isLoading, isError, data, error } = useQuery('pods', () =>
-    kubApi.listNamespacedDeployment('vpp-evc').then((res) => res.body.items)
+    api.apps.listNamespacedDeployment('vpp-evc').then((res) => res.body.items)
   );
   console.log('Deployments2', data);
   return (
