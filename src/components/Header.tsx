@@ -12,7 +12,6 @@ function Header() {
 
   const changeNamespace = (el) => {
     const namespace = data.find((t) => t.metadata.uid === el.target.value);
-    console.log('namespace', namespace);
     dispatch({ type: 'SET_NAMESPACE', payload: namespace });
   };
 
@@ -42,6 +41,7 @@ function Header() {
               onChange={(el) => changeNamespace(el)}
               name="namespace"
             >
+              <option value="all">All</option>
               {data.map((item) => (
                 <option value={item.metadata.uid} key={item.metadata.uid}>
                   {item.metadata.name}

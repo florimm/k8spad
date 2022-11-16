@@ -16,6 +16,12 @@ function countReducer(state: State, action: Action) {
       return { ...state, context: action.payload, namespace: null };
     }
     case 'SET_NAMESPACE': {
+      if (typeof action.payload === 'string') {
+        return {
+          ...state,
+          namespace: null,
+        };
+      }
       return { ...state, namespace: action.payload };
     }
     default: {
