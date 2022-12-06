@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import api from '../../api';
 
 const Deployments = () => {
-  const { isLoading, isError, data, error } = useQuery('pods', () =>
+  const { isLoading, data } = useQuery('deployments', () =>
     api.apps.listNamespacedDeployment('vpp-evc').then((res) => res.body.items)
   );
   console.log('Deployments2', data);

@@ -2,6 +2,7 @@ import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import Namespaces from 'app/namespaces';
 import Nodes from 'app/nodes';
 import Workloads from 'app/workloads';
+import Flow from 'app/flow';
 import './App.css';
 import Clusters from 'app/clusters';
 
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/nodes" element={<Nodes />} />
         <Route path="/clusters" element={<Clusters />} />
         <Route path="/workloads/*" element={<Workloads />} />
+        <Route path="/flow" element={<Flow />} />
       </Routes>
     </main>
   );

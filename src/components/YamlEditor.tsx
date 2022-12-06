@@ -1,5 +1,6 @@
 import React from 'react';
 import AceEditor from 'react-ace';
+import * as monaco from 'monaco-editor';
 
 import 'ace-builds/src-noconflict/mode-yaml';
 import 'ace-builds/src-noconflict/theme-github';

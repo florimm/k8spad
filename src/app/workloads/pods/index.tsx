@@ -10,6 +10,7 @@ import api from '../../api';
 
 const Pods = () => {
   const [isEditing, setIsEditing] = React.useState(false);
+  const [yamlVal, setYamlVal] = React.useState('');
   const { state } = useClusterState();
   const name = state.namespace?.metadata?.name ?? 'all';
   const { isLoading, data } = useQuery(
@@ -26,6 +27,11 @@ const Pods = () => {
       enabled: name !== null,
     }
   );
+
+  const loadYaml = (obj) => {
+    setYamlVal(obj);
+    setIsEditing(true);
+  };
 
   const actionTaken = (action, item: V1Pod) => {
     // api.exec.exec(item.metadata.namespace, item.metadata.name, command: "", stdout: process.stdout);
@@ -76,7 +82,11 @@ const Pods = () => {
                         Actions
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
-                        <Dropdown.Item eventKey={0} href="#">
+                        <Dropdown.Item
+                          onClick={() => loadYaml(item)}
+                          eventKey={0}
+                          href="#"
+                        >
                           Yaml
                         </Dropdown.Item>
                         <Dropdown.Item eventKey={1} href="#">
@@ -107,7 +117,7 @@ const Pods = () => {
         <div className="span-12">
           <h1>Edit yaml</h1>
           <YamlEditor
-            yamlVal=""
+            yamlVal={yamlVal}
             onSave={(newVal) => {
               console.log('new val', newVal);
             }}

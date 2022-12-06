@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import Layout from './Layout';
+import 'reactflow/dist/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const queryClient = new QueryClient();
