@@ -1,4 +1,5 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import { ReactFlowProvider } from 'reactflow';
 import Namespaces from 'app/namespaces';
 import Nodes from 'app/nodes';
 import Workloads from 'app/workloads';
@@ -14,7 +15,14 @@ export default function App() {
         <Route path="/nodes" element={<Nodes />} />
         <Route path="/clusters" element={<Clusters />} />
         <Route path="/workloads/*" element={<Workloads />} />
-        <Route path="/flow" element={<Flow />} />
+        <Route
+          path="/flow"
+          element={
+            <ReactFlowProvider>
+              <Flow />
+            </ReactFlowProvider>
+          }
+        />
       </Routes>
     </main>
   );
