@@ -108,7 +108,7 @@
     }
   },
   "dependencies": {
-    "@kubernetes/client-node": "^0.17.1",
+    "@kubernetes/client-node": "^0.18.0",
     "@reactuses/core": "^1.1.1",
     "ace-builds": "^1.13.1",
     "bootstrap": "^5.2.3",
