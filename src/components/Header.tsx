@@ -17,6 +17,9 @@ function Header() {
 
   return (
     <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+
+      {/* <input className="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search"></input> */}
+      <div className="navbar-nav">
       <Link className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" to="/">
         Company name
       </Link>
@@ -31,8 +34,6 @@ function Header() {
       >
         <span className="navbar-toggler-icon" />
       </button>
-      {/* <input className="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search"></input> */}
-      <div className="navbar-nav">
         <div className="nav-item text-nowrap">
           <label style={{ color: 'white' }} htmlFor="namespace">
             Namespace:

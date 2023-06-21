@@ -4,9 +4,10 @@ import { useClusterState } from 'contexts';
 import Loader from 'components/Loader';
 import YamlEditor from 'components/YamlEditor';
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Button, Dropdown } from 'react-bootstrap';
 import { V1Pod } from '@kubernetes/client-node';
 import api from '../../api';
+import { parse, stringify } from 'yaml'
 
 const Pods = () => {
   const [isEditing, setIsEditing] = React.useState(false);
@@ -29,8 +30,15 @@ const Pods = () => {
   );
 
   const loadYaml = (obj) => {
-    setYamlVal(obj);
-    setIsEditing(true);
+    debugger;
+    api.core.readNamespacedPod(obj.metadata.name, name).then(res => {
+      const podDefinition = res.body;
+      const podYAML = stringify(podDefinition);
+      setYamlVal(podYAML);
+      setIsEditing(true);
+    }).catch(err => {
+      console.log(err);
+    })
   };
 
   const actionTaken = (action, item: V1Pod) => {
@@ -116,12 +124,16 @@ const Pods = () => {
       {isEditing ? (
         <div className="span-12">
           <h1>Edit yaml</h1>
+          <div>
           <YamlEditor
             yamlVal={yamlVal}
-            onSave={(newVal) => {
-              console.log('new val', newVal);
+            onChange={(newVal) => {
+              console.log(newVal);
+              setYamlVal(newVal);
             }}
           />
+          <Button>Save</Button>
+          </div>
         </div>
       ) : null}
     </>

@@ -4,18 +4,8 @@ import * as monaco from 'monaco-editor';
 
 import 'ace-builds/src-noconflict/mode-yaml';
 import 'ace-builds/src-noconflict/theme-github';
-import { Button } from 'react-bootstrap';
 
-function YamlEditor({ yamlVal, onSave }) {
-  const [val, setVal] = React.useState(yamlVal);
-
-  const onChange = (newValue) => {
-    setVal(newValue);
-  };
-
-  const saveChanges = () => {
-    onSave(val);
-  };
+function YamlEditor({ yamlVal, onChange }) {
   return (
     <>
       <AceEditor
@@ -25,7 +15,7 @@ function YamlEditor({ yamlVal, onSave }) {
         mode="yaml"
         theme="github"
         onChange={onChange}
-        value={val}
+        value={yamlVal}
         name="current-yamlEditor"
         highlightActiveLine
         showPrintMargin={false}
@@ -36,7 +26,6 @@ function YamlEditor({ yamlVal, onSave }) {
           showLineNumbers: true,
         }}
       />
-      <Button onClick={saveChanges}>Save and close</Button>
     </>
   );
 }
